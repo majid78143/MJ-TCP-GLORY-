@@ -1,5 +1,5 @@
 export const config = {
-  logo: "YOUR_LOGO_URL_HERE",
+  logo: "https://i.ibb.co/vCStJV56/file-00000000570c71fa8aca9ffbeb7e89ad.png",
   siteName: "KBC Quiz AI",
   adminEmail: "YOUR_ADMIN_EMAIL_HERE",
   adSenseAccount: "ca-pub-8228784571140150",
