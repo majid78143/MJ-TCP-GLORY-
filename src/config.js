@@ -1,9 +1,9 @@
 export const config = {
   logo: "https://i.ibb.co/vCStJV56/file-00000000570c71fa8aca9ffbeb7e89ad.png",
   siteName: "KBC Quiz AI",
-  adminEmail: "YOUR_ADMIN_EMAIL_HERE",
+  adminEmail: "mdmajidansari33640@gmail.com",
   adSenseAccount: "ca-pub-8228784571140150",
-  siteVerification: "<meta name="google-adsense-account" content="ca-pub-8228784571140150">",
+  siteVerification: "rtAiELQGDFkaYQpzRNuS5QFGHoNg_Rbm0viPK7_UnSs",
   apiUrl: import.meta.env.VITE_API_URL || "",
   firebase: {
     apiKey: "AIzaSyCuZDyri0F0ky2sHxFO-p2OKvEB2sQfihw",
