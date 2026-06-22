@@ -3,7 +3,7 @@ export const config = {
   siteName: "KBC Quiz AI",
   adminEmail: "YOUR_ADMIN_EMAIL_HERE",
   adSenseAccount: "ca-pub-8228784571140150",
-  siteVerification: "YOUR_GOOGLE_VERIFICATION_CODE",
+  siteVerification: "<meta name="google-adsense-account" content="ca-pub-8228784571140150">",
   apiUrl: import.meta.env.VITE_API_URL || "",
   firebase: {
     apiKey: "AIzaSyCuZDyri0F0ky2sHxFO-p2OKvEB2sQfihw",
