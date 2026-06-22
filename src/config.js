@@ -2,7 +2,7 @@ export const config = {
   logo: "https://i.ibb.co/vCStJV56/file-00000000570c71fa8aca9ffbeb7e89ad.png",
   siteName: "KBC Quiz AI",
   adminEmail: "mdmajidansari33640@gmail.com",
-  adSenseAccount: "ca-pub-8228784571140150",
+  adSenseAccount: "ca-pub-822878457114",
   siteVerification: "rtAiELQGDFkaYQpzRNuS5QFGHoNg_Rbm0viPK7_UnSs",
   apiUrl: import.meta.env.VITE_API_URL || "",
   firebase: {
