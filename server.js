@@ -18,7 +18,7 @@ app.post("/api/question", async (req, res) => {
   const difficultyMap = { easy: "simple (Class 5-8 level)", medium: "moderate (Class 10 level)", hard: "difficult (competitive exam level)" };
   const usedNote = usedQuestions.length > 0 ? `\nDo NOT repeat these questions: ${usedQuestions.slice(-20).join(" | ")}` : "";
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
     const result = await model.generateContent(
       `You are a quiz master for a KBC-style game. Generate a ${difficultyMap[difficulty] || "moderate"} multiple choice question. ${prompt}. ${usedNote}\n\nRespond ONLY with valid JSON, no markdown, no explanation. Format: {"question":"...","options":{"A":"...","B":"...","C":"...","D":"..."},"correct":"A","explanation":"..."}`
     );
