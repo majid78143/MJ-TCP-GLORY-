@@ -33,7 +33,8 @@ app.post("/api/question", async (req, res) => {
     const data = JSON.parse(completion.choices[0].message.content);
     res.json({ success: true, ...data });
   } catch (e) {
-    res.status(500).json({ success: false, error: "Question generate karne mein problem aayi. Try again!" });
+    console.error("OpenAI Error:", e?.message || e);
+    res.status(500).json({ success: false, error: e?.message || "Question generate karne mein problem aayi. Try again!" });
   }
 });
 
