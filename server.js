@@ -3,12 +3,12 @@ import cors from "cors";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import "dotenv/config";
-import OpenAI from "openai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 app.use(cors());
 app.use(express.json());
@@ -18,22 +18,15 @@ app.post("/api/question", async (req, res) => {
   const difficultyMap = { easy: "simple (Class 5-8 level)", medium: "moderate (Class 10 level)", hard: "difficult (competitive exam level)" };
   const usedNote = usedQuestions.length > 0 ? `\nDo NOT repeat these questions: ${usedQuestions.slice(-20).join(" | ")}` : "";
   try {
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [{
-        role: "system",
-        content: `You are a quiz master for a KBC-style game. Generate ${difficultyMap[difficulty] || "moderate"} questions. Always respond with valid JSON only, no markdown. Format: {"question":"...","options":{"A":"...","B":"...","C":"...","D":"..."},"correct":"A","explanation":"..."}`
-      },{
-        role: "user",
-        content: `${prompt}. Make it ${difficultyMap[difficulty]}. ${usedNote}`
-      }],
-      temperature: 0.9,
-      response_format: { type: "json_object" },
-    });
-    const data = JSON.parse(completion.choices[0].message.content);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const result = await model.generateContent(
+      `You are a quiz master for a KBC-style game. Generate a ${difficultyMap[difficulty] || "moderate"} multiple choice question. ${prompt}. ${usedNote}\n\nRespond ONLY with valid JSON, no markdown, no explanation. Format: {"question":"...","options":{"A":"...","B":"...","C":"...","D":"..."},"correct":"A","explanation":"..."}`
+    );
+    const text = result.response.text().replace(/```json|```/g, "").trim();
+    const data = JSON.parse(text);
     res.json({ success: true, ...data });
   } catch (e) {
-    console.error("OpenAI Error:", e?.message || e);
+    console.error("Gemini Error:", e?.message || e);
     res.status(500).json({ success: false, error: e?.message || "Question generate karne mein problem aayi. Try again!" });
   }
 });
